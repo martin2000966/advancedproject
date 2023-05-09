@@ -7,6 +7,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -37,6 +39,12 @@ public class HelloApplication extends Application {
         p.add(btOK,0,1);
         GridPane.setHalignment(btOK, HPos.CENTER);
 
+        //creating scene
+        Scene scene = new Scene(p, 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+
         //handler for btOK
         btOK.setOnAction((ActionEvent e)->{
           FileChooser fileChooser = new FileChooser();
@@ -49,20 +57,25 @@ public class HelloApplication extends Application {
                 // get the path of the selected file
                 String filePath = f.getPath();
                 System.out.println("Selected file path: " + filePath);
+                stage.close();
+
+                //second stage
+                Pane pane = new Pane();
+                Stage s2 = new Stage();
+                Rectangle square = Draw.createsquare();
+                pane.getChildren().add(square);
+                Scene sc=new Scene(pane,200,300);
+                s2.setScene(sc);
+                s2.show();
             }
             else
-                System.out.println("No file selected!");
+            { System.out.println("No file selected!");
+              }
 
-
-
-        
         });
 
-        //creating scene
-        Scene scene = new Scene(p, 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+
+
 
 
 
